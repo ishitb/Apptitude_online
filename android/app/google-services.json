@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "104633513858",
+    "firebase_url": "https://picbucket-fb207.firebaseio.com",
+    "project_id": "picbucket-fb207",
+    "storage_bucket": "picbucket-fb207.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104633513858:android:3c3379a80dbea03af0819b",
+        "android_client_info": {
+          "package_name": "com.example.Apptitude_online"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104633513858-ak8mhpfpt2jidj9l0igig08v6o6k5gnv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4-nH9JwYpTWVtat3UQccBXJ7QRtQDOyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104633513858-ak8mhpfpt2jidj9l0igig08v6o6k5gnv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
