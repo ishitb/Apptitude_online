@@ -29,6 +29,7 @@ dependencies:
   shared_preferences: ^0.5.7+3
   image_picker: ^0.6.5+2
   path_provider: ^1.6.11
+  firebase_ml_vision: ^0.9.4
 
 
 dev_dependencies:
@@ -41,6 +42,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/images/
   fonts:
     - family: Nunito Black
       fonts:
