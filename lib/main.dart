@@ -1,3 +1,4 @@
+import 'package:Apptitude_online/UI/ThemeSelector.dart';
 import 'package:Apptitude_online/services/theme/themeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

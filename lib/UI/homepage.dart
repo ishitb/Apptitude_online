@@ -20,33 +20,16 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future _getImageThroughCamera() async {
-    var image = await picker.getImage(source: ImageSource.camera);
-    if (image != null) {
-      setState(() {
-        _image = File(image.path);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onHorizontalDragUpdate: (details) {
-        if (details.delta.dx < -6) {
-          print('swipe left');
-          _getImageThroughCamera();
-        }
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
-          children: [],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _getImage,
-          child: Icon(Icons.image),
-        ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _getImage,
+        child: Icon(Icons.image),
       ),
     );
   }
