@@ -1,8 +1,8 @@
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/ThemeSelector.dart';
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/aboutUs.dart';
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/avatar.dart';
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/popular.dart';
+import 'package:Apptitude_online/UI/pages/ThemeSelector.dart';
+import 'package:Apptitude_online/UI/pages/aboutUs.dart';
+import 'package:Apptitude_online/UI/pages/avatar.dart';
 import 'package:Apptitude_online/UI/pages/notifications.dart';
+import 'package:Apptitude_online/UI/pages/popular.dart';
 import 'package:Apptitude_online/services/NavigationProviders/NavigatorProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

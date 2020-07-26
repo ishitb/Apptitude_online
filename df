@@ -1,0 +1,35 @@
+[33mcommit e00ad8d1bbd7b84cafed3ae62f70fbf12ebb35a8[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Yash Sharma <ys909@snu.edu.in>
+Date:   Sun Jul 26 04:55:19 2020 +0530
+
+    Major Ui change
+
+[33mcommit 37ca980d04ddb683b2194a9fceb1eb84381ab100[m
+Author: Yash Sharma <ys909@snu.edu.in>
+Date:   Sun Jul 26 03:19:06 2020 +0530
+
+    theme
+
+[33mcommit 20a67ab8e73c91b3aaa67a9eddf378ba7622078b[m
+Author: Yash Sharma <ys909@snu.edu.in>
+Date:   Sun Jul 26 01:09:41 2020 +0530
+
+    camera
+
+[33mcommit 53e4e0ec9a5189ba2dcc58d4dd67ba6bb65fad26[m
+Author: Yash Sharma <ys909@snu.edu.in>
+Date:   Sun Jul 26 00:16:57 2020 +0530
+
+    few setups
+
+[33mcommit 5901bdb01bf1c7d2e5207c4bd5e45ff7fa36cf31[m
+Author: Yash Sharma <ys909@snu.edu.in>
+Date:   Sat Jul 25 23:54:11 2020 +0530
+
+    firebase integrated
+
+[33mcommit 5fedd40bdaeb0bbc57a82f9ae623225c1750b92d[m
+Author: ishitb <ib370@snu.edu.in>
+Date:   Sat Jul 25 22:08:46 2020 +0530
+
+    Initialised Project with Description:

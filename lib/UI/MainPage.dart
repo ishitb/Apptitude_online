@@ -68,10 +68,10 @@ class _MainPageState extends State<MainPage> {
         ),
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.camera),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   child: Icon(Icons.camera),
+      // ),
       backgroundColor: Colors.white,
       body: FoldableSidebarBuilder(
         status: status,

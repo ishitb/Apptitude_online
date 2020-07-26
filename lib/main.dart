@@ -1,3 +1,4 @@
+import 'package:Apptitude_online/services/NavigationProviders/ImagesProvider.dart';
 import 'package:Apptitude_online/services/NavigationProviders/NavigatorProvider.dart';
 import 'package:Apptitude_online/services/NotificationService/notifModel.dart';
 import 'package:Apptitude_online/services/NotificationService/notificationProvider.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<NavigatorProvider>(
         create: (_) => NavigatorProvider(Explore()),
       ),
+    ChangeNotifierProvider<ImagesProvider>(
+    create: (_) => ImagesProvider(),
+    ),
       StreamProvider<ConnectivityStatus>(
         create: (_) => ConnectivityService().stream,
       )
