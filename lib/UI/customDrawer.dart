@@ -1,7 +1,7 @@
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/ThemeSelector.dart';
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/aboutUs.dart';
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/avatar.dart';
-import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/popular.dart';
+import 'package:Apptitude_online/UI/pages/ThemeSelector.dart';
+import 'package:Apptitude_online/UI/pages/aboutUs.dart';
+import 'package:Apptitude_online/UI/pages/avatar.dart';
+import 'package:Apptitude_online/UI/pages/popular.dart';
 import 'package:Apptitude_online/services/Providers/NavigatorProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +50,7 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               navigatorProvider.setWidget(Explore());
               closeDrawer();
-              },
+            },
             leading: Icon(Icons.explore),
             title: Text(
               "Explore",
@@ -64,7 +64,7 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               navigatorProvider.setWidget(Popular());
               closeDrawer();
-              },
+            },
             leading: Icon(Icons.new_releases),
             title: Text("Popular"),
           ),
@@ -76,7 +76,7 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               navigatorProvider.setWidget(Avatar());
               closeDrawer();
-              },
+            },
             leading: Icon(Icons.person_outline),
             title: Text("Change Avatar"),
           ),
@@ -88,7 +88,7 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               navigatorProvider.setWidget(ThemePage());
               closeDrawer();
-              },
+            },
             leading: Icon(Icons.format_color_fill),
             title: Text("Change Theme"),
           ),
