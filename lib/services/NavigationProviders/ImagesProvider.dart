@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -7,13 +8,34 @@ import 'package:Apptitude_online/services/Models/ImageModel.dart';
 
 class ImagesProvider with ChangeNotifier {
   List images;
+  int page;
 
   ImagesProvider() {
     images = List();
+    page = Random().nextInt(50);
+    getExploredImages();
   }
 
-  List getImages() {
-    return images;
+  Future<void> getImages(String url, {bool explore = false}) async {
+    var response = await http.get(url, headers: {
+      'Authorization': 'Client-ID sK0Oe8akONbjf0aqn3DxUQYeTClkBZPkgi4MiCt0snE'
+    });
+
+    var data = explore
+        ? json.decode(response.body)
+        : json.decode(response.body)['results'];
+
+    // print(data);
+
+    for (var d in data) {
+      images.add(
+        new ImageModel(
+          width: d['width'].toDouble(),
+          height: d['height'].toDouble(),
+          imageUrl: d['urls']['raw'],
+        ),
+      );
+    }
   }
 
   void resetImages() {
@@ -21,51 +43,28 @@ class ImagesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getExploredImages(int page) async {
+  Future<void> getExploredImages() async {
+    resetImages();
     String url = 'https://api.unsplash.com/photos?page=$page';
 
-    var response = await http.get(url, headers: {
-      'Authorization': 'Client-ID sK0Oe8akONbjf0aqn3DxUQYeTClkBZPkgi4MiCt0snE'
-    });
-
-    var data = json.decode(response.body);
-
-    for (var d in data) {
-      images.add(
-        new ImageModel(
-          width: d['width'].toDouble(),
-          height: d['height'].toDouble(),
-          imageUrl: d['urls']['raw'],
-        ),
-      );
-    }
+    await getImages(url, explore: true);
     notifyListeners();
   }
 
-  Future<void> wordSearchImage(List words, int page) async {
+  Future<void> wordSearchImage(List words) async {
+    page = 1;
+    resetImages();
+
     String searchTerms = "";
-    for (var word in words) {
+    for (var word in words ?? [""]) {
       searchTerms += word + ',';
     }
-
     String url =
         'https://api.unsplash.com/search/photos?page=$page&query=$searchTerms';
 
-    var response = await http.get(url, headers: {
-      'Authorization': 'Client-ID sK0Oe8akONbjf0aqn3DxUQYeTClkBZPkgi4MiCt0snE'
-    });
-
-    var data = json.decode(response.body)['results'];
-
-    for (var d in data) {
-      images.add(
-        new ImageModel(
-          width: d['width'].toDouble(),
-          height: d['height'].toDouble(),
-          imageUrl: d['urls']['raw'],
-        ),
-      );
-    }
+    await getImages(url);
     notifyListeners();
   }
+
+  // Future<>
 }

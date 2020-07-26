@@ -10,14 +10,16 @@ class Detection {
 
     final List<ImageLabel> labels = await labeler.processImage(visionImage);
 
-    print("====================================================");
+    final List<String> finalLabels = List();
+
     for (ImageLabel label in labels) {
-      print({
-        'text': label.text,
-        'entityId': label.entityId,
-        'confidence': label.confidence
-      });
+      // print({
+      //   'text': label.text,
+      //   'entityId': label.entityId,
+      //   'confidence': label.confidence
+      // });
+      finalLabels.add(label.text);
     }
-    return [];
+    return finalLabels;
   }
 }
