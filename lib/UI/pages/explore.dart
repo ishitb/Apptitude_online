@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:Apptitude_online/UI/pages/imageView.dart';
 import 'package:Apptitude_online/services/connectivity/connectivityService.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  List<String> searchterms;
   String _searchText = "";
   @override
   void initState() {
@@ -51,7 +53,10 @@ class _ExploreState extends State<Explore> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
+        ),
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -221,6 +226,27 @@ class _ExploreState extends State<Explore> {
             SizedBox(
               height: 10,
             ),
+            searchterms == null
+                ? Container()
+                : Row(
+                    children: searchterms
+                        .map((pill) => Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              child: Text(
+                                pill,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
             connectionStatus == ConnectivityStatus.Online
                 ? Expanded(
                     child: imagesProvider.images.length == 0
@@ -239,11 +265,24 @@ class _ExploreState extends State<Explore> {
                                             10,
                                     width:
                                         imagesProvider.images[index].width / 10,
-                                    child: FadeInImage.assetNetwork(
-                                      placeholderScale: 0.2,
-                                      placeholder: 'assets/utils/Eclipse.gif',
-                                      image:
-                                          imagesProvider.images[index].imageUrl,
+                                    child: GestureDetector(
+                                      onLongPress: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return imageView(
+                                                imgURL: imagesProvider
+                                                    .images[index]
+                                                    .fullImageURL);
+                                          },
+                                        );
+                                      },
+                                      child: FadeInImage.assetNetwork(
+                                        placeholderScale: 0.2,
+                                        placeholder: 'assets/utils/Eclipse.gif',
+                                        image: imagesProvider
+                                            .images[index].imageUrl,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -285,6 +324,9 @@ class _ExploreState extends State<Explore> {
       labels = value;
     });
     imagesProvider.wordSearchImage(labels);
+    setState(() {
+      searchterms = labels;
+    });
   }
 
   Future _getImageThroughCamera(ImagesProvider imagesProvider) async {

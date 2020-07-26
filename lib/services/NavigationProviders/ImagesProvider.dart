@@ -40,6 +40,7 @@ class ImagesProvider with ChangeNotifier {
             width: d['width'].toDouble(),
             height: d['height'].toDouble(),
             imageUrl: d['urls']['thumb'],
+            fullImageURL: d['urls']['full'],
           ),
         );
         file.writeAsStringSync(response.body,

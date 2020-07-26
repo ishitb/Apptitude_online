@@ -1,13 +1,14 @@
 class ImageModel {
-  String imageUrl;
+  String imageUrl, fullImageURL;
   double width, height;
 
-  ImageModel({this.width, this.height, this.imageUrl});
+  ImageModel({this.width, this.height, this.imageUrl, this.fullImageURL});
 
   ImageModel.fromJson(Map<String, dynamic> json) {
     width = json['width'];
     height = json['height'];
     imageUrl = json['imageUrl'];
+    fullImageURL = json['fullImageURL'];
   }
 
   Map<String, dynamic> toJson() {
