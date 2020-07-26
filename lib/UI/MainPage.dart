@@ -1,16 +1,43 @@
-import 'package:Apptitude_online/services/Providers/NavigatorProvider.dart';
+import 'package:Apptitude_online/services/NavigationProviders/NavigatorProvider.dart';
+import 'package:Apptitude_online/services/NotificationService/notifModel.dart';
+import 'package:Apptitude_online/services/NotificationService/notificationProvider.dart';
 import 'package:Apptitude_online/shared/foldable_sidebar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'customDrawer.dart';
 
 class MainPage extends StatefulWidget {
+  final NotificationProvider notif;
+
+  const MainPage({Key key, this.notif}) : super(key: key);
+
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
   FSBStatus status;
+
+  final FirebaseMessaging _fcm = FirebaseMessaging();
+
+  @override
+  void initState() {
+    _fcm.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        widget.notif.addNotif(NotificationModel(
+            title: message['notification']['title'], message: message['notification']['body']));
+        print('added');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +49,7 @@ class _MainPageState extends State<MainPage> {
         elevation: 2,
         leading: IconButton(
           icon: Icon(
-            Icons.menu,
+            status == FSBStatus.FSB_OPEN ? Icons.clear : Icons.menu,
             color: Colors.black,
             size: 30,
           ),
@@ -48,15 +75,15 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: Colors.white,
       body: FoldableSidebarBuilder(
         status: status,
-        drawer: CustomDrawer(closeDrawer: (){
-          setState(() {
-            status = FSBStatus.FSB_CLOSE;
-          });
-        },),
+        drawer: CustomDrawer(
+          closeDrawer: () {
+            setState(() {
+              status = FSBStatus.FSB_CLOSE;
+            });
+          },
+        ),
         screenContents: navigatorProvider.getWidget(),
       ),
     );
   }
 }
-
-

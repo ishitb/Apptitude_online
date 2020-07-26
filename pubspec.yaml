@@ -30,11 +30,18 @@ dependencies:
   image_picker: ^0.6.5+2
   path_provider: ^1.6.11
   firebase_ml_vision: ^0.9.4
+  connectivity: ^0.4.9
+  firebase_messaging: ^6.0.16
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
+  flare_flutter: ^2.0.5
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^0.7.0+2
+  build_runner: ^1.10.0
 
 
 flutter:

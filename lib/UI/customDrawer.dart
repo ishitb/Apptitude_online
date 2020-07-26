@@ -2,7 +2,8 @@ import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/ThemeSelector.dart'
 import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/aboutUs.dart';
 import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/avatar.dart';
 import 'file:///C:/Users/ysyas/Apptitude_online/lib/UI/pages/popular.dart';
-import 'package:Apptitude_online/services/Providers/NavigatorProvider.dart';
+import 'package:Apptitude_online/UI/pages/notifications.dart';
+import 'package:Apptitude_online/services/NavigationProviders/NavigatorProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/explore.dart';
@@ -22,9 +23,10 @@ class CustomDrawer extends StatelessWidget {
       color: Colors.white,
       width: mediaQuery.size.width * 0.60,
       height: mediaQuery.size.height,
-      child: Column(
-        children: <Widget>[
-          Container(
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
               width: double.infinity,
               height: 200,
               color: Colors.grey.withAlpha(20),
@@ -45,75 +47,91 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   Text("Asset Name")
                 ],
-              )),
-          ListTile(
-            onTap: () {
-              navigatorProvider.setWidget(Explore());
-              closeDrawer();
-              },
-            leading: Icon(Icons.explore),
-            title: Text(
-              "Explore",
+              ),
             ),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          ListTile(
-            onTap: () {
-              navigatorProvider.setWidget(Popular());
-              closeDrawer();
+            ListTile(
+              onTap: () {
+                navigatorProvider.setWidget(Explore());
+                closeDrawer();
               },
-            leading: Icon(Icons.new_releases),
-            title: Text("Popular"),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          ListTile(
-            onTap: () {
-              navigatorProvider.setWidget(Avatar());
-              closeDrawer();
+              leading: Icon(Icons.explore),
+              title: Text(
+                "Explore",
+              ),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              onTap: () {
+                navigatorProvider.setWidget(Popular());
+                closeDrawer();
               },
-            leading: Icon(Icons.person_outline),
-            title: Text("Change Avatar"),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          ListTile(
-            onTap: () {
-              navigatorProvider.setWidget(ThemePage());
-              closeDrawer();
+              leading: Icon(Icons.new_releases),
+              title: Text("Popular"),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              onTap: () {
+                navigatorProvider.setWidget(Avatar());
+                closeDrawer();
               },
-            leading: Icon(Icons.format_color_fill),
-            title: Text("Change Theme"),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          ListTile(
-            onTap: () {
-              navigatorProvider.setWidget(AboutUs());
-              closeDrawer();
-            },
-            leading: Icon(Icons.description),
-            title: Text("About Us"),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          ListTile(
-            onTap: () {},
-            leading: Icon(Icons.find_in_page),
-            title: Text("Readme"),
-          ),
-        ],
+              leading: Icon(Icons.person_outline),
+              title: Text("Change Avatar"),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              onTap: () {
+                navigatorProvider.setWidget(ThemePage());
+                closeDrawer();
+              },
+              leading: Icon(Icons.format_color_fill),
+              title: Text("Change Theme"),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              onTap: () {
+                navigatorProvider.setWidget(Notifications());
+                closeDrawer();
+              },
+              leading: Icon(Icons.notifications),
+              title: Text("Notifications"),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              onTap: () {
+                navigatorProvider.setWidget(AboutUs());
+                closeDrawer();
+              },
+              leading: Icon(Icons.description),
+              title: Text("About Us"),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Version 1.0.1'),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
