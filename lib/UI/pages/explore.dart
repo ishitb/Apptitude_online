@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:Apptitude_online/services/connectivity/connectivityService.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,19 +9,45 @@ import 'package:Apptitude_online/services/ObjectDetection/Detection.dart';
 import 'package:Apptitude_online/services/NavigationProviders/ImagesProvider.dart';
 
 class Explore extends StatefulWidget {
+  final String title;
+  Explore({this.title});
   @override
   _ExploreState createState() => _ExploreState();
 }
 
 class _ExploreState extends State<Explore> {
   String _searchText = "";
+  @override
+  void initState() {
+    if (widget.title != null) {
+      setState(() {
+        _searchText = widget.title;
+        print(_searchText);
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(Explore oldWidget) {
+    if (widget.title != null) {
+      setState(() {
+        _searchText = widget.title;
+        print(_searchText);
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   final picker = ImagePicker();
   bool _imageFromCamera = true;
   Detection objectDetector = Detection();
 
   @override
   Widget build(BuildContext context) {
+    print(_searchText);
     final ImagesProvider imagesProvider = Provider.of<ImagesProvider>(context);
+    var connectionStatus = Provider.of<ConnectivityStatus>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -159,7 +186,8 @@ class _ExploreState extends State<Explore> {
                     color: Theme.of(context).primaryColor.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: TextField(
+                  child: TextFormField(
+                    initialValue: _searchText,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.search,
@@ -193,30 +221,52 @@ class _ExploreState extends State<Explore> {
             SizedBox(
               height: 10,
             ),
-            Expanded(
-              child: imagesProvider.images.length == 0
-                  ? Center(child: CircularProgressIndicator())
-                  : GridView.count(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      children: List.generate(
-                        imagesProvider.images.length,
-                        (index) {
-                          return Center(
-                            child: Container(
-                              height: imagesProvider.images[index].height / 10,
-                              width: imagesProvider.images[index].width / 10,
-                              child: FadeInImage.assetNetwork(
-                                placeholder: 'assets/utils/loading.gif',
-                                image: imagesProvider.images[index].imageUrl,
-                              ),
+            connectionStatus == ConnectivityStatus.Online
+                ? Expanded(
+                    child: imagesProvider.images.length == 0
+                        ? Center(child: CircularProgressIndicator())
+                        : GridView.count(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            children: List.generate(
+                              imagesProvider.images.length,
+                              (index) {
+                                return Center(
+                                  child: Container(
+                                    height:
+                                        imagesProvider.images[index].height /
+                                            10,
+                                    width:
+                                        imagesProvider.images[index].width / 10,
+                                    child: FadeInImage.assetNetwork(
+                                      placeholderScale: 0.2,
+                                      placeholder: 'assets/utils/Eclipse.gif',
+                                      image:
+                                          imagesProvider.images[index].imageUrl,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
+                          ),
+                  )
+                : Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 400,
+                            child: FlareActor('assets/emptyFlare.flr',
+                                alignment: Alignment.center,
+                                fit: BoxFit.contain,
+                                animation: "empty"),
+                          ),
+                        ],
                       ),
                     ),
-            )
+                  ),
           ],
         ),
       ),

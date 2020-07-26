@@ -1,14 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:Apptitude_online/services/Models/ImageModel.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ImagesProvider with ChangeNotifier {
   List images;
   int page;
+  List images2;
 
   ImagesProvider() {
     images = List();
@@ -17,25 +20,43 @@ class ImagesProvider with ChangeNotifier {
   }
 
   Future<void> getImages(String url, {bool explore = false}) async {
-    var response = await http.get(url, headers: {
-      'Authorization': 'Client-ID sK0Oe8akONbjf0aqn3DxUQYeTClkBZPkgi4MiCt0snE'
-    });
+    var dir = await getTemporaryDirectory();
+    String fileName = "userdata.json";
 
-    var data = explore
-        ? json.decode(response.body)
-        : json.decode(response.body)['results'];
+    File file = new File(dir.path + "/" + fileName);
 
-    // print(data);
+    try {
+      var response = await http.get(url, headers: {
+        'Authorization': 'Client-ID sK0Oe8akONbjf0aqn3DxUQYeTClkBZPkgi4MiCt0snE'
+      });
 
-    for (var d in data) {
-      images.add(
-        new ImageModel(
-          width: d['width'].toDouble(),
-          height: d['height'].toDouble(),
-          imageUrl: d['urls']['raw'],
-        ),
-      );
+      var data = explore
+          ? json.decode(response.body)
+          : json.decode(response.body)['results'];
+
+      for (var d in data) {
+        images.add(
+          new ImageModel(
+            width: d['width'].toDouble(),
+            height: d['height'].toDouble(),
+            imageUrl: d['urls']['thumb'],
+          ),
+        );
+        file.writeAsStringSync(response.body,
+            flush: true, mode: FileMode.write);
+      }
+    } catch (e) {
+      print('e');
     }
+  }
+
+  Future<ImageModel> getImageOffline() async {
+    var dir = await getTemporaryDirectory();
+    String fileName = "userdata.json";
+    File file = new File(dir.path + "/" + fileName);
+    var jsonData = file.readAsStringSync();
+    ImageModel response = ImageModel.fromJson(json.decode(jsonData));
+    return response;
   }
 
   void resetImages() {
@@ -66,5 +87,5 @@ class ImagesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<>
+// Future<>
 }

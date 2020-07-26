@@ -70,63 +70,66 @@ class _ThemePageState extends State<ThemePage> {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      'Select a Theme!',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 40,
-                        fontFamily: 'Mostserrat',
-                        fontWeight: FontWeight.w700,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 40,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Choose from a wide variety of themes.',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w300,
+                      Text(
+                        'Select a Theme!',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 40,
+                          fontFamily: 'Mostserrat',
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 100),
-                      child: Transform.rotate(
-                        angle: -pi / 7,
-                        child: Container(
-                          height: 400,
-                          width: 400,
-                          child: PageView.builder(
-                            scrollDirection: Axis.horizontal,
-                            controller: ctrl,
-                            itemCount: _gradients.length,
-                            itemBuilder: (context, int index) {
-                              bool active = index == currentPage;
-                              return _buildCircle(
-                                active,
-                                width,
-                                context,
-                                ctrl,
-                                index,
-                                _gradients,
-                                changeThemeTemp,
-                              );
-                            },
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Choose from a wide variety of themes.',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20,bottom: 100),
+                        child: Transform.rotate(
+                          angle: -pi / 7,
+                          child: Container(
+                            height: 400,
+                            width: 400,
+                            child: PageView.builder(
+                              scrollDirection: Axis.horizontal,
+                              controller: ctrl,
+                              itemCount: _gradients.length,
+                              itemBuilder: (context, int index) {
+                                bool active = index == currentPage;
+                                return _buildCircle(
+                                  active,
+                                  width,
+                                  context,
+                                  ctrl,
+                                  index,
+                                  _gradients,
+                                  changeThemeTemp,
+                                );
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               Align(
